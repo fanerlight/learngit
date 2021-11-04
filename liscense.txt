@@ -1,0 +1,2 @@
+add: append the workspace files to the stage 
+commit: transfer the stage files to the head/master

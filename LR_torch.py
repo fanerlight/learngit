@@ -41,3 +41,4 @@ print('b:',unit.linear.bias.data)
 x_test=torch.Tensor([[4.]]).to(device)
 y_test=unit(x_test)
 print('y_test:',y_test.data)
+# git实践出真知，将文件修改后提交到暂存区
