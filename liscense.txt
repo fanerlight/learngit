@@ -18,4 +18,13 @@ git commit -m "comment": transfer the stage files to the head/master
 接着使用git push -u origin master将本地仓库推送到关联的远程库上。其中-u表示第一次推送时，git会将本地master分支推动到远程master分支，并且将master分支也关联起来，在之后的推送中就可以简化命令。以后只要git push origin master即可完成本地到远程的推送。
 最后，如果需要解除本地库和远程库的绑定，使用git remote rm repo_name。注意远程库并没有被删除，只是断开了绑定，真正删除需要上github手动操作。
 /*——————————分支管理————————————*/
-
+对分支的理解，是时间线上的一些结点。每次commit就会在当前分支上产生一个新的结点，之前所学的reset就是在这些结点上进行转移。
+master是一个主线分支，在仓库创建的时候自带该分支，所以在仓库上的改动首先默认是在master分支上进行的，名为master的结点会随着改动。在仓库中有个HEAD指针，永远指向当前的活动结点。
+创建新分支后，该分支对应前进结点是当前结点；将活动转移到该分支之后，HEAD指针就指向当前分支的前进结点。
+git branch <branch_name>创建分支
+git switch <branch_name>切换到指定分支
+以上两步骤也可合并为一步：git checkout -b <branch_name>
+查看当前仓库的分支情况：git branch
+切换branch:git switch <branch_name>，其实就是将HEAD指针指向不同branch的前进结点。
+合并其他branch到当前branch：git merge <branch_name>
+删除其他branch：git branch -d <branch_name>
