@@ -28,3 +28,4 @@ git switch <branch_name>切换到指定分支
 切换branch:git switch <branch_name>，其实就是将HEAD指针指向不同branch的前进结点。
 合并其他branch到当前branch：git merge <branch_name>
 删除其他branch：git branch -d <branch_name>
+/*————————冲突解决————————*/
