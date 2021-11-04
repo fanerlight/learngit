@@ -35,3 +35,10 @@ git switch <branch_name>切换到指定分支
 禁用Fastorward的方法是在合并是加上参数--no-merge即可。
 之后可以使用git log --graph --pretty=oneline --abbrev-commit查看线索图
 在实际生产工作中，master分支是用于上线的稳定版本；dev一般是不稳定版本；协作用户可以每人都有一个分支，之后合并到dev上。
+/*———————————使用分支修复bug———————————*/
+如果在master分支上发现bug，则应该优先考虑创建一个issue分支，修复之后合并到master处，之后删除该issue分支即可。
+主要解决bug的思想就是这样。但在实际工作中可能会出现这种情况：如果要切换到有bug的master分支要提交，当前工作区还是unclear的，并且无法提交（可能影响他人工作）。这时可以先将工作区储藏起来，这样工作区当前就是clean。
+git stash用于储藏工作区，他像一个stack一样把工作区状态压进。
+结束bug修复后，恢复工作区的命令。首先git stash list罗列现有工作区。之后可以指定某个工作区进行恢复。
+git stash apply stash@{<index>}即可
+git stash drop stash@{<index>}删除工作区
