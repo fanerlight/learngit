@@ -32,3 +32,4 @@ git switch <branch_name>切换到指定分支
 所谓冲突是指两个分支在公共结点之后有岔路存在，这时调用git merge <branch_name>就会合并失败，因为不同岔路会有不同的文件存在。git merge会提示有哪些文件冲突，之后直接打开文件可以看到不同分支下的情况，直接在文件里消除冲突，之后即可合并。
 /*—————————管理分支策略—————————*/
 jinyongjinyongjinyongjinyongjinyong
+不能提交到master中，会影响到笔记。那就重新开一个分支。
