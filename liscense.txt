@@ -31,4 +31,7 @@ git switch <branch_name>切换到指定分支
 /*————————冲突解决————————*/
 所谓冲突是指两个分支在公共结点之后有岔路存在，这时调用git merge <branch_name>就会合并失败，因为不同岔路会有不同的文件存在。git merge会提示有哪些文件冲突，之后直接打开文件可以看到不同分支下的情况，直接在文件里消除冲突，之后即可合并。
 /*—————————管理分支策略—————————*/
-jinyongjinyongjinyongjinyongjinyong
+如果当前分支与其他分支没有冲突，直接合并默认采用的是Fast-Forward，即快速前进。这样在仓库中会丢弃“被合并分支”的commit结点，这些结点都已转移到“当前分支”上。
+禁用Fastorward的方法是在合并是加上参数--no-merge即可。
+之后可以使用git log --graph --pretty=oneline --abbrev-commit查看线索图
+在实际生产工作中，master分支是用于上线的稳定版本；dev一般是不稳定版本；协作用户可以每人都有一个分支，之后合并到dev上。
