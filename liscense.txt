@@ -17,4 +17,5 @@ git commit -m "comment": transfer the stage files to the head/master
 上面命令中，origin表示远程库的名字，是默认习惯命名。
 接着使用git push -u origin master将本地仓库推送到关联的远程库上。其中-u表示第一次推送时，git会将本地master分支推动到远程master分支，并且将master分支也关联起来，在之后的推送中就可以简化命令。以后只要git push origin master即可完成本地到远程的推送。
 最后，如果需要解除本地库和远程库的绑定，使用git remote rm repo_name。注意远程库并没有被删除，只是断开了绑定，真正删除需要上github手动操作。
+/*——————————分支管理————————————*/
 
