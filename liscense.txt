@@ -1,2 +1,6 @@
 add: append the workspace files to the stage 
 commit: transfer the stage files to the head/master
+查看当前版本库中有多少提交，使用git log，可以得到历史提交的版本号；可以用git reset进行回溯或者前进
+如果回到过去之后，想要回到未来，可用git reflog查看未来版本号
+查看当前git版本库状态，使用git status，可以知道工作区、暂存区中的修改记录与提交情况
+比较工作区和master中的版本区别，使用git diff
