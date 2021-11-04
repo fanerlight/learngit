@@ -5,8 +5,9 @@ git commit -m "comment": transfer the stage files to the head/master
 如果回到过去之后，想要回到未来，可用git reflog查看未来版本号
 查看当前git版本库状态，使用git status，可以知道工作区、暂存区中的修改记录与提交情况
 比较工作区和master中的版本区别，使用git diff version_number
-如果对工作区的文件进行了错误的修改，但还未进行git add 将其添加到stage暂存区，可以使用git checkout --  filename进行撤销修改
+如果对工作区的文件进行了错误的修改，但还未进行git add 将其添加到stage暂存区，可以使用git checkout --  filename进行撤销修改。
 错误修改如果已经add到stage暂存区，可以使用git reset HEAD filename将该文件重新放回workspace
 如果将错误修改已经commit到本地版本库，使用git reset version_number 进行历史穿越。
 因此git reset不光可以用于stage的恢复，也可以用于整个版本库的回溯。但如果将修改提交到了远程版本库，就可能会被其他人看到。
-
+/*————————如果文件误删怎么办——————————*/
+在工作区删除了某个文件，但是还没有add到stge，想要恢复，使用git checkout -- filename。其实git checkout的作用，就是把本地版本库的最近一次的备份（检查点）同步到workspace，道理和之前文件内容作了修改但还没有add是一样的。
