@@ -1,7 +1,7 @@
 import  torch
 import numpy
 device=torch.device('cuda:0')
-
+# 尝试使用中文注释
 # prepare the data set
 x_train=torch.Tensor([[1.],[2.],[3.]])
 y_train=torch.Tensor([[2.],[4,],[6.]])
