@@ -33,3 +33,4 @@ git switch <branch_name>切换到指定分支
 /*—————————管理分支策略—————————*/
 jinyongjinyongjinyongjinyongjinyong
 不能提交到master中，会影响到笔记。那就重新开一个分支。
+这是一条bug修复！！！！
