@@ -27,6 +27,9 @@ test_loader=DataLoader(dataset=test_set,batch_size=batch_size,shuffle=False,num_
 设我们使用两个卷积层作为残差层的运算
 '''
 class Residual(torch.nn.Module):
+    '''
+    为了让残差块能够复用到CNN中的任意一个位置，就必须对输入层的通道兼容。等同于使用普通的Conv2d，因为Conv2d在构造的时候也需要给入in和out
+    '''
     def __init__(self,in_channels):# 残差网络的超参数应该是什么？
         super().__init__()
         self.activate=torch.nn.ReLU()

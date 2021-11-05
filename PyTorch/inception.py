@@ -27,19 +27,28 @@ test_loader=DataLoader(dataset=test_set,batch_size=batch_size,shuffle=False,num_
 为了增强该类的复用性，给入一个构造参数——inchannel表示输入层的通道数量
 '''
 class Inception(torch.nn.Module):
-    def __init__(self,in_channel):# 为什么这里要传入输入层数？一会视频复习考虑
+    # 为什么这里要传入输入层数？一会视频复习考虑。
+    '''
+    传入输入层数的目的，是为了让这个Inception模块能够在不同的地方被复用。
+    如果in_channel被写死，意味着整个这个Inception结构只能用于某些特定的输出C
+    '''
+    def __init__(self,in_channel):
         super().__init__()
-        self.branch_pool=torch.nn.Conv2d(in_channel,out_channels=24,kernel_size=1)
-        self.branch_1x1=torch.nn.Conv2d(in_channel,out_channels=24,kernel_size=1)# 1x1卷积核大小已经确定了输出的大小与原图像相同
+        # 1x1卷积核大小已经确定了输出的大小与原图像相同，所以其他并行分支也必须要得到与原图相同的大小输出
+        self.branch_1x1=torch.nn.Conv2d(in_channel,out_channels=24,kernel_size=1)
+        # 池化卷积层为了获得与输入层相同的长宽高，在池化的时候不能是默认stride为2，而应该成为1，并且kernel也不再是2
+        self.branch_pool_1=torch.nn.AvgPool2d(kernel_size=3,padding=1,stride=1)
+        self.branch_pool_2=torch.nn.Conv2d(in_channel,out_channels=24,kernel_size=1)
+        # 5*5大小的卷积核，为了得到W、H不变的输出，padding应该设置为2
         self.branch_5x5_1=torch.nn.Conv2d(in_channel,out_channels=16,kernel_size=5,padding=2)
         self.branch_5x5_2=torch.nn.Conv2d(in_channels=16,out_channels=24,kernel_size=5,padding=2)
+        # 3*3大小的卷积核，为了得到与输入W、H相同的初始，padding应该设置为1
         self.branch_3x3_1=torch.nn.Conv2d(in_channel,out_channels=16,kernel_size=3,padding=1)
         self.branch_3x3_2=torch.nn.Conv2d(in_channels=16,out_channels=24,kernel_size=3,padding=1)
         self.branch_3x3_3=torch.nn.Conv2d(in_channels=24,out_channels=24,kernel_size=3,padding=1)
 
     def forward(self,x:torch.Tensor):
-        branch_pool=torch.nn.AvgPool2d(kernel_size=3,padding=1,stride=1)(x)
-        branch_pool=self.branch_pool(branch_pool)
+        branch_pool=self.branch_pool_2(self.branch_pool_1(x))
         branch_1x1=self.branch_1x1(x)
         branch_3x3=self.branch_3x3_1(x)
         branch_3x3=self.branch_3x3_2(branch_3x3)
@@ -110,4 +119,4 @@ def test():
 if __name__=='__main__':
     for i in range(10):
         train(i)
-        # test()
+        test()
