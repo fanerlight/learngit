@@ -1,7 +1,7 @@
 import  torch
 import numpy
 device=torch.device('cuda:0')
-# 尝试使用中文注释
+
 # prepare the data set
 x_train=torch.Tensor([[1.],[2.],[3.]])
 y_train=torch.Tensor([[2.],[4,],[6.]])
@@ -41,4 +41,3 @@ print('b:',unit.linear.bias.data)
 x_test=torch.Tensor([[4.]]).to(device)
 y_test=unit(x_test)
 print('y_test:',y_test.data)
-# git实践出真知，将文件修改后提交到暂存区
